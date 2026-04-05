@@ -1,0 +1,399 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{yhmath}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{multicol}
+\usepackage{eufrak}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+\usepackage{cancel} 
+\usepackage{comment}
+\usepackage{mathrsfs}
+\usepackage{fancyref}
+\usepackage{cancel}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{quiver}
+\usepackage[backend=biber,style=numeric]{biblatex} 
+\addbibresource{references.bib} 
+\usepackage{imakeidx}
+\usepackage{tikz}
+\usepackage{xfrac}
+\usepackage{titlesec}
+\usepackage[toc, page]{appendix}
+\usepackage[spanish, english]{babel}
+\usepackage[a4paper, top=3cm, bottom=3cm,left=2cm,right=2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.15}
+\renewcommand{\labelitemii}{◦}
+\setlength{\parskip}{0mm}
+\setlength{\parindent}{0pt} 
+\usetikzlibrary{arrows}
+\usetikzlibrary{angles}
+\usepackage{tocloft}
+\renewcommand{\cftsecdotsep}{\cftdotsep}
+\usetikzlibrary{quotes}
+\usetikzlibrary{calc}
+\usetikzlibrary{babel}
+\usetikzlibrary{fit, patterns.meta}
+\pagestyle{plain}
+
+\def\tq{\;\;|\;\;}
+\def\qq{\quad}
+\def\K{\mathbb{K}}
+\def\N{\mathbb{N}}
+\def\Spec{\mathrm{Spec\,}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\C{\mathbb{C}}
+\def\A{\mathbb{A}}
+\def\suma{\sum\limits_{n=1}^\infty a_n}
+\def\norm{\mathrm{N}}
+\def\tr{\mathrm{Tr}}
+\def\irr{\mathrm{Irr}}
+\def\Res{\mathrm{Res}}
+\def\disc{\mathrm{disc}}
+\def\Mod{\mathrm{Mod}}
+\def\Id{\mathrm{Id}}
+\def\O{\mathcal{O}}
+\def\det{\mathrm{det}}
+\def\Ob{\mathrm{Ob}}
+\def\lcm{\mathrm{lcm}}
+\def\Gal{\mathrm{Gal}}
+\def\M{\mathcal M}
+\def\p{\mathfrak p}
+\def\Hom{\mathrm{Hom}}
+\def\RePart{\mathrm{Re}}
+\def\ImPart{\mathrm{Im}}
+
+\renewcommand{\to}{\longrightarrow}
+\newcommand\bigslant[2]{{^{\displaystyle #1}}\Big/{_{\displaystyle #2}}}
+\newcommand{\definemap}[5]{%
+  \begin{array}{rrcl}
+    #1: & #2 & \longrightarrow & #3 \\
+        & #4 & \longmapsto   & #5
+  \end{array}
+}
+
+
+\titlespacing{\paragraph}{%
+  0pt}{
+  -1em}{
+  1em}
+
+\DeclarePairedDelimiter\inorm{\lVert}{\rVert}%
+
+\def\padic{\textit{p}-adic }
+\def\th{^{\textrm{th}}}
+\newcommand{\polmin}[2]{\textrm{polmin} ( #1,\;#2 ) }
+
+\usepackage{mdframed}
+\newenvironment{importantremark}{%
+    \begin{mdframed}[topline=false, bottomline=false, rightline=false, linewidth=2pt, linecolor=gray!50, innerleftmargin=10pt]%
+    \textbf{Remark:} %
+}{%
+    \end{mdframed}%
+}
+%Numbering theorems, corollaries and lemmas.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+
+%Definitions
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+\setlength{\parskip}{1em} 
+\setlist{topsep=0pt}
+
+\title{Quantitative Finance for Mathematicians}
+\author{David Huélamo Longás}
+\date{}
+
+
+
+\begin{document}
+\maketitle
+\begin{abstract}\setlength{\parindent}{0pt}\setlength{\parskip}{0.8em}
+\noindent This project explores the mathematical foundations of financial derivatives pricing, specifically focusing on the valuation of European call options within the Black-Scholes framework. We begin by defining the nature of derivatives as contracts whose value is derived from an underlying stochastic asset, modeled here using Geometric Brownian Motion (GBM). A central challenge in option pricing is the unobservable nature of the real-world drift parameter ($\mu$), which reflects subjective investor risk preferences and cannot be estimated with high statistical confidence.
+
+To resolve this, we employ the principle of no-arbitrage and the construction of a self-financing replicating portfolio. By dynamically hedging the option with a combination of the underlying stock and a risk-free bank account, we show that market risk can be neutralized. Applying Itô's Lemma to this hedging strategy leads to the derivation of the Black-Scholes partial differential equation (PDE), which reveals that the parameters determining the fair price of an option are the risk-free interest rate ($r$) and the asset returns' implied volatility ($\sigma$).
+
+Furthermore, the project presents the elegant probabilistic solution to the pricing problem using risk-neutral valuation. Through the application of Girsanov's Theorem, we perform a change of probability measure from the physical measure ($P$) to a risk-neutral measure ($Q$). Under measure $Q$, the discounted asset price becomes a martingale, effectively eliminating the unknown drift $\mu$ from the pricing equation. This transformation allows the fair price to be expressed as the discounted expected payoff under the risk-neutral measure, providing the theoretical basis for the modern quantitative approach to derivative markets.
+
+Developed specifically for a mathematical audience, this work bridges the gap between abstract stochastic calculus and financial intuition. It provides rigorous yet accessible explanations for fundamental economic concepts, such as market efficiency, the role of risk-free assets, and the mechanics of hedging, which are frequently omitted from standard undergraduate mathematics curricula.
+\end{abstract}
+
+\newpage\tableofcontents\newpage
+
+
+\section{Financial Derivatives}
+In finance, contracts are valuable. They can be sold and bought. For instance, a ticket that is guaranteed to pay \$1,000 tomorrow can be sold today for, say, \$995. A financial derivative is one of these contracts, whose value depends on an exogenous variable, called the \textit{underlying asset}. Consider an investor worried about what the price of wheat will be next month. She knows she will have to buy wheat next month, but she is scared that the price might increase abruptly. To prevent this risk, this person can buy a contract that gives her the right to buy a certain amount of wheat next month at a pre-specified price $K$. This contract is a particular kind of \textit{derivative} called \textit{European call option}.
+
+\subsection*{Mathematical Setup}
+
+To provide a rigorous foundation for our analysis, we must establish the formal probabilistic framework required for stochastic calculus. Consider a time horizon $T > 0$, alongside a probability space $(\Omega, \mathcal{F}, P)$. In this context, we define:
+
+\begin{description}
+    \item[Underlying Asset:] A stochastic process $\{S_t:\; 0 \leq t \leq T\}$, where $S_t : \Omega \to \R$ is $\mathcal{F}_t$-measurable for all $t \in [0,T]$.
+    \item[Derivative:] A new asset written on $S_t$ whose final payment at time $T$ is the random variable $f \circ S_T$, where $f: \R \to \R$ is an arbitrary function. 
+    \item[Payoff:] The final payment $f(S_T)$ delivered at maturity.
+    \item[Long and Short:] The owner of the derivative is the \textit{long}, while the agent committing to pay the payoff at time $T$ is the \textit{short}.
+\end{description}
+
+
+In the previous example, the payoff of the derivative was $\max(S_T-K,0)$, where $S_T$ represents the price of wheat at time $T=1$ month. This is because the contract gives the owner the \textit{right}, but not the obligation, to buy wheat at price $K$. Consequently, there are two possibilities: \begin{enumerate}[label=(\roman*)]
+    \item $S_T \geq K$, in which case the long's interest is to exercise the right of buying wheat at the cheaper price $K$,
+    \item $S_T < K$, in which case the best option is to buy wheat at market price.
+\end{enumerate}
+Unlike other types of contracts in which both counterparties face a symmetric exposure (e.g. a futures contract, which requires no upfront payment from either party), here it is exclusively the short who faces a potentially negative payoff in any scenario where $S_T>K$. To compensate for this contractual asymmetry, the long pays an upfront premium. This premium is precisely the amount that makes the contract fair, in the sense of having zero net present value for both parties at inception.
+
+This is an example of a physically settled derivative. Upon exercise, rather than receiving $\max(S_T - K, 0)$ units of currency directly, the long pays $K$ to the short and takes delivery of the underlying asset, which is worth $S_T$ in the market. The economic gain is identical, but it materializes as ownership of the asset rather than as a cash transfer. In practice, most derivatives are cash settled: the seller simply pays the buyer $\max(S_T - K, 0)$ at expiry, with no exchange of the underlying asset taking place.
+
+
+Even though the European call option payoff depends on the value of the underlying asset at $t=T$, independently of what its value is throughout the interval $[0,T]$, the value of the derivative itself does depend on time. One fundamental problem of quantitative finance is to determine a map \[
+\begin{array}{rrcl}
+    V:&[0,T]\times\R&\to &\R^+\\
+    & (t,S) &\longmapsto & V(t,S),
+\end{array}
+\]which we will call the \textit{price function} associated to our derivative, such that $V(t,S_t)$ represents the theoretical fair value of the derivative at time $t\in[0,T]$. Note that in case this function exists, necessarily $V(T,S_T)=f(S_T)$.
+
+\section{Replicating an Option}
+The sale of a derivative with a payoff $f(S_T)$ creates a financial obligation for the short at maturity $t=T$. To hedge this exposure, one can construct a self-financing portfolio designed to replicate the option's terminal payoff. In finance, a \textit{portoflio} is a linear combination of financial assets such as equities, bonds, derivatives and currencies, structured to achieve specific risk and return objectives.
+        
+We say that a portfolio $\Pi$ with price $\Pi_t$ at time $t\in[0,T]$ \textit{replicates} a call option with value $V_t$ at time $t\in[0,T]$ if they have the same payoff almost surely, i.e., if for $P$-almost all $\omega\in\Omega$,\[
+\Pi_T(\omega)=V_T(\omega).
+    \]
+
+\begin{importantremark}
+If there exists $t \in [0,T]$ such that $V_t > \Pi_t$, one could sell the option and buy the replicating portfolio at time $t$, locking in an immediate positive cash flow. Since the terminal payoffs are identical, this strategy yields a strictly positive riskless profit $P$-almost surely at maturity $T$. Investors would immediately arbitrage such opportunities, pushing the price Vt down until the mispricing disappears. Such markets are called \textit{arbitrage-free}. Similarly, $V_t< \Pi_t$ is not possible for any $t$. Intuitively, it means that the agents cannot earn free money without assuming some risk. In other words, $\Pi_t=V_t$ almost surely. This also implies $d\Pi_t=dV_t$.\end{importantremark}
+
+
+We will see that it is possible to replicate an option using the appropriate amount $\Delta_t$ of stocks $S_t$ and the appropriate amount $\psi_t$ of dollars in a bank account $M_t$. A \textit{bank account} is the risk-free, i.e., deterministic asset $M_t$ representing the value of \$1 invested at time zero, growing at the \textit{risk-free rate} $r$. It satisfies the ODE\[
+    dM_t=rM_tdt.
+\]
+Although the interest rate $r$ in reality is stochastic and time-varying, we assume it to be constant and deterministic. This assumption is typically innocuous when pricing equity options, as interest rate variability is negligible compared to equity market volatility.
+
+ Hence, the value of our portfolio at time $t$ is $\Pi_t=\Delta_t S_t + \psi_t M_t$, and it will be a \textit{self-financing} portfolio, which means that no money gets in or out of it after the initial investment. Mathematically:\[
+    \Pi_t =\Pi_0 + \underbrace{\int_0^t\Delta_udS_u+\int_0^t \psi_udM_u}_{\text{``Gain process''}},
+    \]or equivalently\[
+    d\Pi_t = \Delta_t dS_t+\psi_t dM_t.
+    \] 
+
+
+\section{Black-Scholes-Merton Model}
+Assume the stock price $S_t$ satisfies the following stochastic differential equation\begin{equation}\label{eq:diff-eq-1}
+    \begin{array}{lcl}
+        dS_t &=& \mu S_tdt+\sigma S_td B_t.
+    \end{array}
+\end{equation}
+This SDE defines the dynamics of the underlying asset price under the Geometric Brownian Motion model. This process serves as the foundation for the Black-Scholes-Merton framework, which we utilize to derive a mathematically fair price for financial derivatives. Looking at equation \eqref{eq:diff-eq-1}, we see that the component $\mu S_tdt$ represents the \textit{expected growth} of the asset. The parameter $\mu$ is called the \textit{drift}. Since $\mu$ is multiplied by $S_t$, this means that the amount of growth depends on the current price level. 
+
+The second component $\sigma S_td B_t$ represents \textit{market uncertainty} or \textit{volatility}. The parameter $\sigma$ is called \textit{volatility}. Just like the drift, the impact of a market shock is proportional to the current price $S_t$. Our goal is to find the mathematically fair price for a call option based on this stock. By using Itô's lemma, it can be checked that the solution for equation \eqref{eq:diff-eq-1} corresponds to a log-normal distribution for $S_t$, implying that the logarithmic returns $\ln(S_t/S_0)$, $t\in [0,T]$, are normally distributed.
+
+\begin{importantremark}
+Stock prices do not follow a log-normal distribution in practice. Normal distributions are symmetric and, consequently, have no skewness. Real-world stock return distributions, however, typically exhibit negative skewness, meaning that large market crashes are more frequent and volatile than large market rallies.
+
+Furthermore, real-world stock return distributions show positive excess kurtosis, which means they have fat tails compared to normal distributions. These problems can be addressed by adopting more complex models, such as the Heston model, which incorporates stochastic volatility. For pricing vanilla derivatives such as European equity options, such modelling sophistication is typically not required.
+\end{importantremark}
+
+Note that there is no practical way to find the market value for $\mu$ in \eqref{eq:diff-eq-1}. Because financial data is incredibly noisy, estimating the drift with any statistical confidence requires decades of data, by which time the underlying economic fundamentals have completely changed. Furthermore, even if $\mu$ were perfectly known, one could think that the right choice is to buy if $\mu>r$ and sell if $\mu\leq r$. However, due to the existence of nonzero volatility $\sigma$, the excess return ($\mu - r$) must provide sufficient compensation for the risk inherent in holding the stock to justify a long position. Investors have different levels of risk aversion, meaning they would never agree on how much risk they are willing to accept for that specific $\mu$. For this reason, it is impossible to reach a universal, objective price for an option based only on this real-world description. 
+\begin{importantremark}
+    While there are no experimental ways to find the market value for $\mu$, one can obtain values for $\sigma$. To keep it simple, one can observe the market price for the derivative $C$, and write $C=C_{BS}(\sigma)$ to represent that the value of $\sigma$ we need to use in our Black-Scholes model must yield a price for the derivative equal to the market price. Then one can try to compute $\sigma$ by taking the inverse image of $C$ by the function $C_{BS}$, i.e., $\sigma=C_{BS}^{-1}(C)$. This can be done because there is a one-to-one correspondence between each volatility value $\sigma$ and the Black-Scholes price $C_{BS}$, hence the map $C_{BS}^{-1}$ is well defined.
+    
+    Note that the volatility obtained with this method will not represent real-world volatility, since as we already discussed Black-Scholes model does not represent real-world markets appropriately. This is why sometimes we refer to $\sigma$ as \textit{Black-Scholes implied volatility}, and denote it by $\sigma_{BS}$ to specify what we are talking about.
+    
+    The discrepancy between the Black-Scholes model and real-world dynamics leads to the phenomenon known as volatility skew. This refers to the observation that different strike prices ($K$) yield different implied volatilities ($\sigma_{BS}$), contradicting the assumption that $\sigma$ is a constant parameter of the underlying asset $S_t$, independent of the specific derivative's terms. We will still refer to Black-Scholes implied volatility simply as $\sigma$ from now on.
+\end{importantremark}
+
+\section{Black-Scholes SDE}
+By the discussion in section 2, we can try to replicate our option, $V(t,S_t)$, with a portfolio of stocks and a bank account. Indeed, note that by Itô's lemma,\begin{equation}\label{eq:dif-option-price}\begin{split}
+dV &= \frac{\partial V}{\partial t}dt + \frac{\partial V}{\partial S}dS_t + \frac{1}{2} \frac{\partial^2 V}{\partial S^2}dS_t^2 \\
+&= \left( \frac{\partial V}{\partial t} + \mu S_t \frac{\partial V}{\partial S} + \frac{1}{2}\sigma^2 S_t^2 \frac{\partial^2 V}{\partial S^2} \right) dt + \underbrace{\sigma S_t \frac{\partial V}{\partial S} dB_t}_{\text{The Noise}},\end{split}
+\end{equation}where, for notational convenience, we suppress the explicit dependence of $V$ on $(t, S_t)$. To replicate this, we build a self-financing portfolio with wealth $\Pi_t$. This portfolio holds $\Delta_t$ units of the stock and $\psi_t$ units of a bank account $M_t$. As explained in the previous section, $dM_t = r M_t dt$. The total value of the portfolio is:
+\begin{equation}\label{eq:portfolio}
+    \Pi_t = \Delta_t S_t + \psi_t M_t.
+\end{equation}
+
+
+Because the portfolio is self-financing:
+\begin{equation}\label{eq:portfolio-diff-2}
+    d\Pi_t = \Delta_t dS_t + \psi_t dM_t.
+\end{equation}
+
+
+Substituting the dynamics of the stock and the bank account into this equation, we obtain:
+\begin{align*}
+d\Pi_t &= \Delta_t (\mu S_tdt+\sigma S_td B_t) + \psi_t (r M_t dt) \\
+d\Pi_t &= \left( \Delta_t \mu S_t + \psi_t r M_t \right) dt + \underbrace{\Delta_t \sigma S_t dB_t}_{\text{Portfolio Noise}}
+\end{align*}
+
+To perfectly match the risk of the option in \eqref{eq:dif-option-price}, we choose our stock holding to be $\Delta_t = \frac{\partial V(t,S_t)}{\partial S}$. Notice that the noise part of our portfolio now perfectly coincides with the noise of the call option in \eqref{eq:dif-option-price}.
+
+Since we want our portfolio $\Pi_t$ to be designed to perfectly replicate the option $V(t,S_t)$, absence of arbitrage opportunities implies that their total values must coincide ($\Pi_t = V_t$). From equation \eqref{eq:portfolio}, this implies our cash position must be $\psi_t M_t = V - \Delta_t S_t$. Substituting this cash position and $\Delta_t$ back into \eqref{eq:portfolio-diff-2}:
+\[
+d\Pi_t = \left( \mu S_t \frac{\partial V(t,S_t)}{\partial S}dt + r\left(V - S_t \frac{\partial V(t,S_t)}{\partial S}\right) \right) dt + \sigma S_t \frac{\partial V(t,S_t)}{\partial S} dB_t
+\]
+
+Because the portfolio and the option are identical in value and risk, their expected growth (the $dt$ terms) must also be identical. Equating the drift of $d\Pi_t$ to the drift of $dV(t,S_t)$ from \eqref{eq:dif-option-price}:
+\[
+\mu S_t \frac{\partial V}{\partial S} + r V - r S_t \frac{\partial V}{\partial S} = \frac{\partial V}{\partial t} + \mu S_t \frac{\partial V}{\partial S} + \frac{1}{2}\sigma^2 S_t^2 \frac{\partial^2 V}{\partial S^2}.
+\]
+
+The terms containing the unobservable subjective drift $\left(\mu S_t \frac{\partial V}{\partial x}\right)$ perfectly cancel out on both sides. Rearranging the remaining terms leaves us with the fundamental Black-Scholes partial differential equation:
+\[
+\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S_t^2 \frac{\partial^2 V}{\partial S^2} + r S_t \frac{\partial V}{\partial S} - r V = 0
+\]
+This PDE fundamentally proves that the fair price is driven by the risk-free rate $r$ and volatility $\sigma$, but not by $\mu$. While we could try to solve this differential equation directly using boundary conditions, there is an elegant probabilistic approach that will allow us to price our option. This idea is developed throughout the following section.
+
+\section{Risk-Neutral Measure and Black-Scholes Formula}    
+To solve the problem of pricing the call option probabilistically, we must move to a Risk-Neutral World. Girsanov's Theorem allows us to perform a change of probability measure from the physical measure $P$ to a new, equivalent measure $Q$. 
+
+Let $\mathcal F_t$ represent the natural filtration corresponding to the Brownian motion $B_t$. A measure $Q$ is said to be an \textit{equivalent martingale measure} if:\begin{enumerate}[label=(\roman*)]
+    \item $Q$ is equivalent to $P$, i.e., for all $A\in\mathcal F$, $Q(A)=0$ if and only if $P(A)=0$.
+    \item The Radon-Nikodym derivative $dQ/dP$ belongs to $L^2(\Omega,\mathcal F_T, P)$,
+    \item The ``discounted asset price'' process $\tilde S_t\coloneq e^{-rt}S_t$ is a $Q$-martingale, that is, for all $0\leq u\leq t\leq T$:\[
+    E(\tilde S_t\mid F_u)= \tilde S_u.
+    \]
+\end{enumerate}
+\begin{importantremark}
+    While $S_t$ is the nominal price observed in the market at time $t$, $\tilde{S}_t$ is its discounted price. In other words, it is the amount of money you would have needed to invest at $t=0$ at the risk-free rate $r$ to reach exactly $S_t$ at time $t$.
+\end{importantremark}
+
+Assume first that such a measure $Q$ exists, which we will prove later. Then the discounted price for our portfolio $\tilde \Pi_t\coloneq e^{-rt}\Pi_t$ will satisfy\begin{equation*}
+\begin{split}
+    d\tilde \Pi_t &= d(e^{-rt}\Pi_t)= -re^{-rt}\Pi_tdt + e^{-rt}d\Pi_t\\
+                &=  -r e^{-rt} (\Delta_t S_t + \psi_t M_t) dt + e^{-rt} (\Delta_t dS_t + \psi_t r M_t dt)\\
+                &= \Delta_t \left( e^{-rt} dS_t - r e^{-rt} S_t dt \right) = \Delta_t d\tilde S_t,
+\end{split}
+\end{equation*}and consequently $\tilde \Pi_t$ will be a $Q$-martingale as well. Now, since $\Pi_t=V_t$ almost surely for $P$, and $Q$ is equivalent to $P$, we have $\Pi_t=V_t$ almost surely for $Q$. This implies $\tilde\Pi_t=\tilde V_t=e^{-rt}V_t$ almost surely for $Q$, so $\tilde V_t$ is also a $Q$-martingale. Consequently:
+\[
+\begin{split}
+    e^{-rt}V_t=\tilde V_t=E^Q[\tilde V_T\mid \mathcal F_t]=E^Q[e^{-rT}\max(S_T-K,0)\mid \mathcal F_t]=e^{-rT}E^Q[\max(S_T-K,0)\mid \mathcal F_t].
+\end{split}
+\]
+Multiplying both sides by $e^{rt}$ yields the Risk-Neutral Pricing Formula:
+\[
+V_t=e^{-r(T-t)}E^Q[\max(S_T-K,0)\mid \mathcal F_t].
+\]We can deduce by Itô's formula that\[
+S_T = S_t \exp\left( \left(r - \frac{\sigma^2}{2}\right)(T-t) + \sigma (W_T - W_t) \right).
+\]This allows us to compute the expectation, yielding the fair price $V_t$ for the European call option:
+\begin{align*}
+    V_t &= S_t \Phi(d_1) - K e^{-r\tau} \Phi(d_2).
+\end{align*}See the appendix for the exact computation.
+
+Now we prove the existence of such a measure $Q$, which will follow mainly from Girsanov's Theorem. Fix $\lambda\in\R$ and consider the random variable\[
+L_T=\exp\left(-\lambda B_T-\frac{\lambda^2}{2}T\right).
+\]Define $Q(A)=E^P(1_AL_T)$ for each $A\in\mathcal F_T$. Girsanov's Theorem shows that $Q$ is a well-defined measure equivalent to $P$, and that $W_t=B_t+\lambda t$ is a $Q$-Brownian motion. It remains to prove that $\tilde S_t$ is a $Q$-martingale. Substituting into \eqref{eq:diff-eq-1}:
+\[
+dS_t = \mu S_tdt+\sigma S_t(dW_t-\lambda dt),
+\]
+which we can rewrite as
+\begin{equation}\label{eq:diff-eq-2}
+    dS_t= (\mu-\sigma\lambda)S_tdt+\sigma S_tdW_t.
+\end{equation}
+Let $\lambda = \frac{\mu-r}{\sigma}$. Going back to the definition of $L_T$ with this choice for $\lambda$
+\[
+L_T=\exp\left(-\frac{\mu-r}{\sigma} B_T-\frac{(\mu-r)^2}{2\sigma^2}T\right),
+\]
+observe that if $\mu>r$, which means that the stock yields more than the risk-free rate, then $\lambda > 0$. This implies that the trajectories where the stock goes up significantly receive less probability weight under $Q$ than they did under $P$ and conversely. Now \eqref{eq:diff-eq-2} becomes
+\begin{equation}\label{eq:diff-eq-3}
+    dS_t = r S_t dt + \sigma S_t dW_t.
+\end{equation}
+
+Under the risk-neutral measure $Q$, all assets are expected to grow exactly at rate $r$. By discounting the stock price to $\tilde{S}_t$, we eliminate this predictable upward drift. 
+
+Let $f(t,S)=e^{-rt}S$, so that $\tilde S_t=f(t,S_t)$. We are going to apply Itô's Formula.
+\[
+df(t,S_t)=\frac{\partial f}{\partial t}dt +\frac{\partial f}{\partial S}dS_t +\frac{1}{2}\frac{\partial ^2 f}{\partial S^2}(dS_t)^2.
+\]
+Bearing in mind that $\partial_{xx} f = 0$, our equation is
+\[
+d\tilde S_t= -r e^{-rt}S_t dt+e^{-rt}(rS_t dt+ \sigma S_t dW_t)=\sigma\tilde S_t dW_t.
+\]
+Which means
+\[
+\tilde S_t=\tilde S_s+\int_s^t \sigma \tilde S_u dW_u.
+\]
+Therefore,
+\[
+E^Q[\tilde S_t \mid \mathcal F_s]=\tilde S_s,
+\]
+which proves that $\tilde S_t$ is a $Q$-martingale, as desired. The fact that $\tilde{S}_t$ becomes a $Q$-martingale means that it behaves as a perfectly ``fair game'' with no predictable trend.
+\newpage
+\section*{Appendix: Calculation of the Expected Payoff}
+\addcontentsline{toc}{section}{Appendix: Calculation of the Expected Payoff}
+Let $y = \ln(S_T)$, $\tau=T-t$. Because the increments of a Brownian motion are normally distributed, $y$ follows a normal distribution $y \sim N(\mu_y, \sigma_y^2)$ with mean $\mu_y = \ln(S_t) + \left(r - \frac{\sigma^2}{2}\right)\tau$ and standard deviation $\sigma_y = \sigma\sqrt{\tau}$. 
+
+The expected value is calculated by integrating the payoff function against the probability density function of $y$:
+\begin{equation*}
+    \mathbb{E}^{\mathbb{Q}} \left[ (e^y - K)^+ \right] = \int_{-\infty}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma\sqrt{\tau}} \max(S_T-K,0) \exp\left( -\frac{1}{2} \left( \frac{y - \left(\ln(S_t) + (r - \frac{\sigma^2}{2})\tau\right)}{\sigma\sqrt{\tau}} \right)^2 \right) dy.
+\end{equation*}
+
+Since the payoff $\max(S_T-K,0)$ is strictly positive only when $y > \ln(K)$, we restrict the lower limit of integration to $\ln(K)$:
+\begin{equation*}
+    = \int_{\ln(K)}^{+\infty} \frac{1}{\sqrt{2\pi}\sigma\sqrt{\tau}} (e^y - K) \exp\left( -\frac{1}{2} \left( \frac{y - \left(\ln(S_t) + (r - \frac{\sigma^2}{2})\tau\right)}{\sigma\sqrt{\tau}} \right)^2 \right) dy.
+\end{equation*}
+
+We perform the standardization change of variable for the normal distribution:
+\begin{equation*}
+    z = \frac{y - \left(\ln(S_t) + (r - \frac{\sigma^2}{2})\tau\right)}{\sigma\sqrt{\tau}} \implies dy = \sigma\sqrt{\tau} dz \quad \text{and} \quad y = \ln(S_t) + \left(r - \frac{\sigma^2}{2}\right)\tau + \sigma\sqrt{\tau} z.
+\end{equation*}
+
+The new lower limit of integration becomes:
+\begin{equation*}
+    z_{lower} = \frac{\ln(K) - \ln(S_t) - \left(r - \frac{\sigma^2}{2}\right)\tau}{\sigma\sqrt{\tau}} = - \frac{\ln(S_t/K) + \left(r - \frac{\sigma^2}{2}\right)\tau}{\sigma\sqrt{\tau}} = -d_2.
+\end{equation*}
+
+Substituting this into the integral and splitting it into two terms:
+\begin{align*}
+    \mathbb{E}^{\mathbb{Q}} \left[ (e^y - K)^+ \right] &= \int_{-d_2}^{+\infty} \frac{1}{\sqrt{2\pi}} \left( \exp\left( \ln(S_t) + \left(r - \frac{\sigma^2}{2}\right)\tau + \sigma\sqrt{\tau} z \right) - K \right) e^{-\frac{1}{2} z^2} dz \\
+    &= S_t e^{\left(r - \frac{\sigma^2}{2}\right)\tau} \int_{-d_2}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{\sigma\sqrt{\tau} z - \frac{1}{2}z^2} dz \quad - \quad K \int_{-d_2}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz.
+\end{align*}
+
+To solve the first integral, we complete the square in the exponent:
+\begin{equation*}
+    \sigma\sqrt{\tau} z - \frac{1}{2}z^2 = -\frac{1}{2}(z^2 - 2\sigma\sqrt{\tau} z) = -\frac{1}{2}(z - \sigma\sqrt{\tau})^2 + \frac{1}{2}\sigma^2\tau.
+\end{equation*}
+
+Factoring out the constant term $e^{\frac{1}{2}\sigma^2\tau}$, the leading coefficient simplifies beautifully:
+\begin{equation*}
+    S_t e^{\left(r - \frac{\sigma^2}{2}\right)\tau} e^{\frac{1}{2}\sigma^2\tau} = S_t e^{r\tau}.
+\end{equation*}
+
+Thus, the first integral becomes:
+\begin{equation*}
+    S_t e^{r\tau} \int_{-d_2}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}(z - \sigma\sqrt{\tau})^2} dz.
+\end{equation*}
+
+We apply a final translation $u = z - \sigma\sqrt{\tau}$, shifting the lower limit to $-d_2 - \sigma\sqrt{\tau} = -d_1$, where $d_1 = \frac{\ln(S_t/K) + (r + \frac{\sigma^2}{2})\tau}{\sigma\sqrt{\tau}}$. Using the symmetry property of the standard normal cumulative distribution function, $\int_{-x}^{+\infty} \phi(t) dt = \Phi(x)$, we obtain the solutions for both integrals:
+\begin{align*}
+    I &= S_t e^{r\tau} \int_{-d_1}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}u^2} du \quad - \quad K \int_{-d_2}^{+\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz \\
+    &= S_t e^{r\tau} \Phi(d_1) - K \Phi(d_2).
+\end{align*}
+
+
+
+
+\nocite{*}
+\newpage
+\printbibliography[heading=bibintoc, title={Bibliography}]
+\end{document}
